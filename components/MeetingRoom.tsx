@@ -26,6 +26,7 @@ import { useRouter } from "next/navigation";
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
 const MeetingRoom = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get("personal");
   const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
@@ -34,8 +35,6 @@ const MeetingRoom = () => {
   const { useCallCallingState } = useCallStateHooks();
   const callingState = useCallCallingState();
   if (callingState !== CallingState.JOINED) return <Loader />;
-
-  const router = useRouter();
 
   const CallLayout = () => {
     switch (layout) {
